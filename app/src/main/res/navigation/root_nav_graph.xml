@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_graph"
+  app:startDestination="@id/splashPage">
+
+  <fragment
+    android:id="@+id/splashPage"
+    android:name="com.farhanhp.myanimedb.pages.splash.SplashPage"
+    android:label="page_splash"
+    tools:layout="@layout/page_splash" >
+    <action
+      android:id="@+id/action_splashPage_to_mainPage"
+      app:destination="@id/mainPage"
+      app:popUpTo="@id/splashPage"
+      app:popUpToInclusive="true" />
+  </fragment>
+  <fragment
+    android:id="@+id/mainPage"
+    android:name="com.farhanhp.myanimedb.pages.main.MainPage"
+    android:label="page_main"
+    tools:layout="@layout/page_main" >
+    <action
+      android:id="@+id/action_mainPage_to_loginPage"
+      app:destination="@id/loginPage" />
+  </fragment>
+  <fragment
+    android:id="@+id/loginPage"
+    android:name="com.farhanhp.myanimedb.pages.login.LoginPage"
+    android:label="page_login"
+    tools:layout="@layout/page_login" />
+</navigation>

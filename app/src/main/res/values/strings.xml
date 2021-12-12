@@ -1,0 +1,9 @@
+<resources>
+  <string name="app_name">MyAnimeDB</string>
+  <string name="web_client_id">854736525276-d0lvaj1ljot3pemqeq6vvl37il7kf2g9.apps.googleusercontent.com</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="myanimedb">MyAnimeDB</string>
+  <string name="favorite_anime">Favorite Anime</string>
+  <string name="profile">Profile</string>
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="@color/dark_purple"
+  android:paddingHorizontal="10dp"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <LinearLayout
+    android:id="@+id/homeBtnContainer"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <View
+      android:id="@+id/homeBtnIndicator"
+      android:layout_width="match_parent"
+      android:layout_height="3dp"/>
+
+    <com.google.android.material.button.MaterialButton
+      style="@style/BottomBarIconButton"
+      app:icon="@drawable/ic_outline_movie_24"
+      android:id="@+id/homeBtn"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content" />
+  </LinearLayout>
+
+  <LinearLayout
+    app:layout_constraintLeft_toRightOf="@id/homeBtnContainer"
+    app:layout_constraintRight_toLeftOf="@id/accountBtnContainer"
+    app:layout_constraintTop_toTopOf="parent"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <View
+      android:id="@+id/favoriteBtnIndicator"
+      android:layout_width="match_parent"
+      android:layout_height="3dp"/>
+    
+    <com.google.android.material.button.MaterialButton
+      style="@style/BottomBarIconButton"
+      app:icon="@drawable/ic_baseline_favorite_border_24"
+      android:id="@+id/favoriteBtn"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content" />
+  </LinearLayout>
+
+  <LinearLayout
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:id="@+id/accountBtnContainer"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <View
+      android:id="@+id/accountBtnIndicator"
+      android:layout_width="match_parent"
+      android:layout_height="3dp"/>
+
+    <com.google.android.material.button.MaterialButton
+      style="@style/BottomBarIconButton"
+      app:icon="@drawable/ic_outline_account_circle_24"
+      android:id="@+id/accountBtn"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content" />
+  </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
