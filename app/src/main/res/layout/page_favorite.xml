@@ -9,6 +9,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
       <TextView
+        android:id="@+id/title"
         android:layout_marginTop="10dp"
         android:textColor="@color/white"
         android:paddingHorizontal="10dp"
@@ -20,6 +21,40 @@
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
+
+      <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+          android:paddingLeft="10dp"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <TextView
+            android:id="@+id/noFavoriteAnime"
+            android:textColor="@color/purple"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/no_favorite_anime"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+          <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/favoriteAnimeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+          <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/favoriteAnimeSkeletonList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+      </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
   </FrameLayout>
 </layout>

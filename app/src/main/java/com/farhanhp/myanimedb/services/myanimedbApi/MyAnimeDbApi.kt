@@ -11,9 +11,15 @@ interface MyAnimeDbApi {
   @POST("user/login/google")
   fun loginWithGoogle(@Body body: LoginWithGoogleBody): Call<LoginWithGoogleResponse>
 
-  @GET("afterlogin/user/profile")
-  fun getProfile(@Header("authorization") loginToken: String): Call<LoginUser>
-
   @GET("anime/{offset}/{limit}")
   fun getAnime(@Path("offset") offset: Int, @Path("limit") limit: Int, @Header("authorization") loginToken: String?): Call<GetAnimeResponse>
+
+  @GET("afterlogin/anime/favorite")
+  fun getFavoriteAnime(@Header("authorization") loginToken: String, @Query("offset") offset: Int, @Query("limit") limit: Int): Call<GetAnimeResponse>
+
+  @DELETE("afterlogin/anime/favorite/delete/{id}")
+  fun deleteFavoriteAnime(@Header("authorization") loginToken: String, @Path("id") animeId: String): Call<Unit>
+
+  @GET("afterlogin/user/profile")
+  fun getProfile(@Header("authorization") loginToken: String): Call<LoginUser>
 }

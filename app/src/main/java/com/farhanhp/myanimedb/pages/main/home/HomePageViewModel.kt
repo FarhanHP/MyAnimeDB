@@ -30,7 +30,6 @@ class HomePageViewModel(
     val isFetchingAnime = _isFetchingAnime.value as Boolean
     if(!isFetchingAnime && animeCount > animeArr.size) {
       _isFetchingAnime.value = true
-      animeArr = _animeArr.value as List<Anime>
       viewModelScope.launch {
         MyAnimeDbApiService.getAnime(animeArr.size, LIMIT, loginToken).let {
           if(it != null) {

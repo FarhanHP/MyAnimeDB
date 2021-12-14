@@ -8,21 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.farhanhp.myanimedb.*
-import com.farhanhp.myanimedb.classes.MainChildPage
+import com.farhanhp.myanimedb.abstracts.MainChildPage
 import com.farhanhp.myanimedb.databinding.PageProfileBinding
 import com.farhanhp.myanimedb.datas.LoginUser
-import com.farhanhp.myanimedb.pages.main.MainPage
 import com.google.android.material.button.MaterialButton
 
 class ProfilePage : MainChildPage() {
   private lateinit var binding: PageProfileBinding
-  private lateinit var mainActivityParent: MainActivity
-  private lateinit var mainActivityViewModel: MainActivityViewModel
-  private lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
-  private lateinit var mainPageParent: MainPage
   private lateinit var loginUser: LoginUser
 
   private lateinit var profileImage: ImageView
@@ -42,11 +36,7 @@ class ProfilePage : MainChildPage() {
       null,
     )
 
-    mainActivityParent = requireActivity() as MainActivity
-    mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
-    mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
     loginUser = mainActivityViewModel.loginUser as LoginUser
-    mainPageParent = parentFragment?.parentFragment as MainPage
 
     initProfileImage()
     initFullnameTextView()

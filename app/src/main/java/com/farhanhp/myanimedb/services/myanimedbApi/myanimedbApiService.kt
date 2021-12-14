@@ -94,5 +94,45 @@ object MyAnimeDbApiService {
     return null
   }
 
+  suspend fun getFavoriteAnime(
+    loginToken: String,
+    offset: Int,
+    limit: Int,
+    timeoutCount: Int = 0
+  ): GetAnimeResponse? {
+    try {
+      val response = retrofitService.getFavoriteAnime(loginToken, offset, limit).awaitResponse()
+      if(response.isSuccessful) {
+        return response.body()
+      }
+    } catch (error: Throwable) {
+      Log.e(TAG, error.message.toString())
+
+      // resend request when heroku server is down due to idling for certain time
+      if(error is SocketTimeoutException && timeoutCount < 2) {
+        return getFavoriteAnime(loginToken, offset, limit, timeoutCount + 1)
+      }
+    }
+
+    return null
+  }
+
+  suspend fun deleteFavoriteAnime(
+    loginToken: String,
+    animeId: String,
+    timeoutCount: Int = 0
+  ) {
+    try {
+      retrofitService.deleteFavoriteAnime(loginToken, animeId).awaitResponse()
+    } catch (error: Throwable) {
+      Log.e(TAG, error.message.toString())
+
+      // resend request when heroku server is down due to idling for certain time
+      if(error is SocketTimeoutException && timeoutCount < 2) {
+        return deleteFavoriteAnime(loginToken, animeId, timeoutCount + 1)
+      }
+    }
+  }
+
   private const val TAG = "MyAnimeDbApiService"
 }

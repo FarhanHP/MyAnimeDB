@@ -18,8 +18,13 @@ class AnimeAdapter(
 ): RecyclerView.Adapter<AnimeAdapter.ViewHolder>() {
   var data = listOf<Anime>()
     set(value) {
+      val oldField = field
       field = value
-      notifyDataSetChanged()
+      if(oldField.size <= value.size) {
+        notifyItemRangeInserted(oldField.size, value.size)
+      } else {
+        notifyDataSetChanged()
+      }
     }
 
   override fun getItemCount() = data.size
