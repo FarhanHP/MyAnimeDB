@@ -2,6 +2,7 @@ package com.farhanhp.myanimedb
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.farhanhp.myanimedb.datas.LoginUser
@@ -20,7 +21,7 @@ class MainActivityViewModel(
       return field
     }
     set(value) {
-      application.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).edit().putString(value, LOGIN_TOKEN_KEY).apply()
+      application.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).edit().putString(LOGIN_TOKEN_KEY, value).apply()
       field = value
     }
 
@@ -60,14 +61,20 @@ class MainActivityViewModel(
         loginUser = response.data
 
         successCallback()
+      } else {
+        failCallback()
       }
-
-      failCallback()
     }
+  }
+
+  fun logout() {
+    loginUser = null
+    loginToken = null
   }
 
   companion object {
     const val SHARED_PREFERENCE_NAME = "MY-ANIME-DB"
     const val LOGIN_TOKEN_KEY = "LOGIN_TOKEN"
+    const val TAG = "MainActivityViewModel"
   }
 }

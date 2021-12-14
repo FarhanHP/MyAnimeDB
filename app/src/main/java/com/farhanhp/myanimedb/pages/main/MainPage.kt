@@ -76,6 +76,10 @@ class MainPage : Fragment() {
     }
   }
 
+  fun redirectToHome(navController: NavController, pageDirection: NavDirections?) {
+    redirect(navController, pageDirection, BottomBar.Companion.Button.HOME)
+  }
+
   private fun redirect(navController: NavController, pageDirection: NavDirections?, buttonCode: BottomBar.Companion.Button) {
     if(pageDirection != null) {
       bottomBar.setActiveButton(buttonCode)

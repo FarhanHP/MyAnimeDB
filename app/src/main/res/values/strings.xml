@@ -6,4 +6,8 @@
   <string name="myanimedb">MyAnimeDB</string>
   <string name="favorite_anime">Favorite Anime</string>
   <string name="profile">Profile</string>
+  <string name="login_for_better_experience">Login for better experience</string>
+  <string name="sign_in_with_google">Sign in With Google</string>
+  <string name="log_out">Log Out</string>
+  <string name="score">Score</string>
 </resources>

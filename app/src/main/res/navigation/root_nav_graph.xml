@@ -29,5 +29,11 @@
     android:id="@+id/loginPage"
     android:name="com.farhanhp.myanimedb.pages.login.LoginPage"
     android:label="page_login"
-    tools:layout="@layout/page_login" />
+    tools:layout="@layout/page_login" >
+    <action
+      android:id="@+id/action_loginPage_to_mainPage"
+      app:destination="@id/mainPage"
+      app:popUpTo="@id/loginPage"
+      app:popUpToInclusive="true" />
+  </fragment>
 </navigation>

@@ -21,6 +21,7 @@ class SplashPage : Fragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
+    val view = inflater.inflate(R.layout.page_splash, container, false)
     mainActivityParent = requireActivity() as MainActivity
     mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
     mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
@@ -31,7 +32,7 @@ class SplashPage : Fragment() {
     })
 
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.page_splash, container, false)
+    return view
   }
 
   private fun redirectToHomePage() {

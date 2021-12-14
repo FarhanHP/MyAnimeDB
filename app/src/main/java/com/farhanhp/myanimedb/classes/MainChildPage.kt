@@ -5,7 +5,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.farhanhp.myanimedb.pages.main.MainPage
 
-open class MainChildPage: Fragment() {
+abstract class MainChildPage: Fragment() {
   private lateinit var mainPageParent: MainPage
 
   protected fun initBottomBar(

@@ -1,24 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".pages.main.favorite.ProfilePage">
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".pages.main.favorite.ProfilePage">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent">
+    <TextView
+      android:layout_marginTop="10dp"
+      android:id="@+id/title"
+      android:textColor="@color/white"
+      android:paddingHorizontal="10dp"
+      android:gravity="center_vertical"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:text="@string/profile"
+      android:fontFamily="@font/poppins_bold"
+      android:textSize="20sp"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
-      <TextView
-        android:textColor="@color/white"
-        android:paddingHorizontal="10dp"
+      android:layout_height="50dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_marginTop="10dp"
+      android:layout_marginHorizontal="10dp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/title"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_width="match_parent"
+      android:layout_height="0dp">
+
+      <LinearLayout
         android:gravity="center_vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/profile"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+          android:layout_marginRight="10dp"
+          app:cardCornerRadius="60dp"
+          android:layout_width="60dp"
+          android:layout_height="60dp">
+          <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+          android:orientation="vertical"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+          <TextView
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_bold"
+            android:id="@+id/fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+          <TextView
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins"
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+      </LinearLayout>
+
+      <com.google.android.material.button.MaterialButton
+        app:iconGravity="end"
+        app:iconTint="@color/dark_purple"
+        app:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:id="@+id/logoutBtn"
+        app:strokeColor="@color/dark_purple"
+        app:strokeWidth="2dp"
+        android:textColor="@color/dark_purple"
+        android:fontFamily="@font/poppins_bold"
+        android:backgroundTint="@color/grey"
+        app:cornerRadius="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/log_out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-  </FrameLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

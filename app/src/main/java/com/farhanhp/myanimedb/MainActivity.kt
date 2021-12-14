@@ -5,6 +5,7 @@ import android.content.IntentSender
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
@@ -17,8 +18,10 @@ class MainActivity : AppCompatActivity() {
   private lateinit var viewModel: MainActivityViewModel
   private lateinit var oneTapClient: SignInClient
   private lateinit var signUpRequest: BeginSignInRequest
-  private val REQ_ONE_TAP = 2  // Can be any integer unique to the Activity
-  private var showOneTapUI = true
+  private val REQ_ONE_TAP = 1  // Can be any integer unique to the Activity
+
+  private var googleSignInSuccessCallback: (()->Unit)? = null
+  private var googleSignInFailCallback: (()->Unit)? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -27,7 +30,11 @@ class MainActivity : AppCompatActivity() {
     viewModelFactory = MainActivityViewModelFactory(application)
     viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
 
-    /*oneTapClient = Identity.getSignInClient(this)
+    initGoogleSignIn()
+  }
+
+  private fun initGoogleSignIn() {
+    oneTapClient = Identity.getSignInClient(this)
     signUpRequest = BeginSignInRequest.builder()
       .setGoogleIdTokenRequestOptions(
         BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
@@ -38,7 +45,11 @@ class MainActivity : AppCompatActivity() {
           .setFilterByAuthorizedAccounts(false)
           .build())
       .build()
+  }
 
+  fun startGoogleSignIn(successCallback: (()->Unit)?, failCallback: (()->Unit)?) {
+    googleSignInFailCallback = failCallback
+    googleSignInSuccessCallback = successCallback
     oneTapClient.beginSignIn(signUpRequest)
       .addOnSuccessListener(this) { result ->
         try {
@@ -46,13 +57,15 @@ class MainActivity : AppCompatActivity() {
             result.pendingIntent.intentSender, REQ_ONE_TAP,
             null, 0, 0, 0)
         } catch (e: IntentSender.SendIntentException) {
+          googleSignInFailCallback?.invoke()
           Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
         }
       }
       .addOnFailureListener(this) { e ->
         // No Google Accounts found. Just continue presenting the signed-out UI.
+        googleSignInFailCallback?.invoke()
         Log.d(TAG, e.localizedMessage)
-      }*/
+      }
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -72,17 +85,19 @@ class MainActivity : AppCompatActivity() {
       when {
         idToken != null -> {
           viewModel.loginWithGoogle(idToken, {
-
+            googleSignInSuccessCallback?.invoke()
           }, {
-
+            googleSignInFailCallback?.invoke()
           })
         }
         else -> {
           // Shouldn't happen.
+          googleSignInFailCallback?.invoke()
           Log.d(TAG, "No ID token!")
         }
       }
     } catch (e: ApiException) {
+      googleSignInFailCallback?.invoke()
       Log.d(TAG, e.message.toString())
     }
   }
