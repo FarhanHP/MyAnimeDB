@@ -17,7 +17,6 @@ import com.farhanhp.myanimedb.databinding.PageLoginBinding
 import com.google.android.material.card.MaterialCardView
 
 class LoginPage : SecondaryPage() {
-  private lateinit var mainActivityParent: MainActivity
   private lateinit var binding: PageLoginBinding
   private lateinit var topbar: SecondaryPageTopBar
   private lateinit var googleSignIn: MaterialCardView
@@ -29,7 +28,6 @@ class LoginPage : SecondaryPage() {
     savedInstanceState: Bundle?
   ): View {
     binding = DataBindingUtil.inflate(inflater, R.layout.page_login, container, false)
-    mainActivityParent = requireActivity() as MainActivity
     viewModel = ViewModelProvider(this).get(LoginPageViewModel::class.java)
     topbar = binding.topbar
     topbar.setBackButtonClickListener {

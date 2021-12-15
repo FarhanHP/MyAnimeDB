@@ -95,4 +95,8 @@ class MainPage : Fragment() {
   private fun redirectToLoginPage() {
     findNavController().navigate(MainPageDirections.actionMainPageToLoginPage())
   }
+
+  fun redirectToSearchAnimePage(keyword: String) {
+    findNavController().navigate(MainPageDirections.actionMainPageToAnimeSearchPage(keyword))
+  }
 }

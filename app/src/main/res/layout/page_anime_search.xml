@@ -1,45 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
   <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/purple_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.main.home.HomePage">
+    tools:context=".pages.animesearch.AnimeSearchPage">
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
-      <com.farhanhp.myanimedb.components.HomePageTopBar
+      <com.farhanhp.myanimedb.components.SecondaryPageTopBar
         android:id="@+id/topbar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:title="Search Anime Result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
       <ScrollView
+        android:paddingHorizontal="10dp"
         app:layout_constraintTop_toBottomOf="@id/topbar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <LinearLayout
           android:orientation="vertical"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingBottom="10dp"
-          android:paddingHorizontal="5dp">
+          android:layout_height="wrap_content">
+          <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/keywordTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+          <TextView
+            android:id="@+id/noAnimeTextView"
+            android:visibility="gone"
+            android:textSize="18sp"
+            android:text="No Anime :("
+            android:gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/purple"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/animeList"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
           <androidx.recyclerview.widget.RecyclerView
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            android:id="@+id/animeSkeletonList"
+            android:id="@+id/skeletonAnimeList"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         </LinearLayout>

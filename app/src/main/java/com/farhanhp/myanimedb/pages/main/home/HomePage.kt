@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.farhanhp.myanimedb.R
+import com.farhanhp.myanimedb.abstracts.AnimeViewModel
 import com.farhanhp.myanimedb.abstracts.MainChildPage
+import com.farhanhp.myanimedb.components.HomePageTopBar
 import com.farhanhp.myanimedb.databinding.PageHomeBinding
 
 class HomePage : MainChildPage() {
@@ -20,6 +22,7 @@ class HomePage : MainChildPage() {
   private lateinit var animeSkeletonRecyclerView: RecyclerView
   private lateinit var animeAdapter: AnimeAdapter
   private lateinit var animeSkeletonAdapter: AnimeSkeletonAdapter
+  private lateinit var topBar: HomePageTopBar
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
@@ -29,7 +32,7 @@ class HomePage : MainChildPage() {
     animeAdapter = AnimeAdapter {
       viewModel.fetchAnime()
     }
-    animeSkeletonAdapter = AnimeSkeletonAdapter(HomePageViewModel.LIMIT)
+    animeSkeletonAdapter = AnimeSkeletonAdapter(AnimeViewModel.LIMIT)
   }
 
   override fun onCreateView(
@@ -43,6 +46,11 @@ class HomePage : MainChildPage() {
       HomePageDirections.actionHomePageToFavoritePage(),
       HomePageDirections.actionHomePageToProfilePage()
     )
+
+    topBar = binding.topbar
+    topBar.setOnSearchListener {
+      mainPageParent.redirectToSearchAnimePage(it)
+    }
 
     animeRecyclerView = binding.animeList
     animeRecyclerView.adapter = animeAdapter

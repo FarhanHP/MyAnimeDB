@@ -12,7 +12,7 @@ interface MyAnimeDbApi {
   fun loginWithGoogle(@Body body: LoginWithGoogleBody): Call<LoginWithGoogleResponse>
 
   @GET("anime/{offset}/{limit}")
-  fun getAnime(@Path("offset") offset: Int, @Path("limit") limit: Int, @Header("authorization") loginToken: String?): Call<GetAnimeResponse>
+  fun getAnime(@Path("offset") offset: Int, @Path("limit") limit: Int, @Header("authorization") loginToken: String?, @Query("keyword") keyword: String? = null): Call<GetAnimeResponse>
 
   @GET("afterlogin/anime/favorite")
   fun getFavoriteAnime(@Header("authorization") loginToken: String, @Query("offset") offset: Int, @Query("limit") limit: Int): Call<GetAnimeResponse>

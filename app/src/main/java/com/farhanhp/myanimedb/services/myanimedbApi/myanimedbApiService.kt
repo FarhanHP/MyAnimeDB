@@ -75,10 +75,11 @@ object MyAnimeDbApiService {
     offset: Int,
     limit: Int,
     loginToken: String?,
+    keyword: String? = null,
     timeoutCount: Int = 0
   ): GetAnimeResponse? {
     try {
-      val response = retrofitService.getAnime(offset, limit, loginToken).awaitResponse()
+      val response = retrofitService.getAnime(offset, limit, loginToken, keyword).awaitResponse()
       if(response.isSuccessful) {
         return response.body()
       }
@@ -87,7 +88,7 @@ object MyAnimeDbApiService {
 
       // resend request when heroku server is down due to idling for certain time
       if(error is SocketTimeoutException && timeoutCount < 2) {
-        return getAnime(offset, limit, loginToken, timeoutCount + 1)
+        return getAnime(offset, limit, loginToken, keyword, timeoutCount + 1)
       }
     }
 

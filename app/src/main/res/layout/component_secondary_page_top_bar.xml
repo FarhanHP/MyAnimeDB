@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:paddingHorizontal="10dp"
-  android:paddingTop="10dp"
+  android:padding="10dp"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <com.google.android.material.button.MaterialButton
     style="@style/IconButton"
-    app:cornerRadius="30dp"
+    app:cornerRadius="40dp"
     app:iconTint="@color/dark_purple"
     app:icon="@drawable/ic_baseline_arrow_back_ios_new_24"
     app:layout_constraintLeft_toLeftOf="parent"
@@ -19,6 +18,9 @@
     android:layout_height="40dp"/>
 
   <TextView
+    android:layout_marginLeft="10dp"
+    android:textSize="20sp"
+    android:textColor="@color/white"
     android:fontFamily="@font/poppins_bold"
     android:id="@+id/title"
     app:layout_constraintLeft_toRightOf="@id/backBtn"

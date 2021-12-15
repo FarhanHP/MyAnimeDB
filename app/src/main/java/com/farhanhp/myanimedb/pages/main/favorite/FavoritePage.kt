@@ -31,7 +31,7 @@ class FavoritePage : MainChildPage() {
     viewModelFactory = FavoritePageViewModelFactory(mainActivityViewModel.loginToken as String)
     viewModel = ViewModelProvider(this, viewModelFactory).get(FavoritePageViewModel::class.java)
     favoriteAnimeAdapter = FavoriteAnimeAdapter({
-      viewModel.fetchFavoriteAnime()
+      viewModel.fetchAnime()
     }, {
       viewModel.deleteFavoriteAnime(it)
     })
@@ -55,17 +55,17 @@ class FavoritePage : MainChildPage() {
     horizontalAnimeSkeletonRecyclerView = binding.favoriteAnimeSkeletonList
     horizontalAnimeSkeletonRecyclerView.adapter = horizontalAnimeSkeletonAdapter
 
-    viewModel.favoriteAnimeArr.observe(viewLifecycleOwner) {
+    viewModel.animeArr.observe(viewLifecycleOwner) {
       favoriteAnimeAdapter.data = it
     }
 
-    viewModel.isFetchingFavoriteAnime.observe(viewLifecycleOwner) {
+    viewModel.isFetchingAnime.observe(viewLifecycleOwner) {
       horizontalAnimeSkeletonRecyclerView.visibility = when(it) {
         true -> View.VISIBLE
         else -> View.GONE
       }
 
-      noFavoriteAnimeText.visibility = if(viewModel.favoriteAnimeArr.value?.isEmpty() as Boolean && !it) {
+      noFavoriteAnimeText.visibility = if(viewModel.animeArr.value?.isEmpty() as Boolean && !it) {
         View.VISIBLE
       } else {
         View.GONE

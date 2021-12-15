@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  app:cardCornerRadius="20dp"
+  android:backgroundTint="@color/purple"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  <LinearLayout
+    android:paddingVertical="5dp"
+    android:paddingHorizontal="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+      app:cardElevation="0dp"
+      android:backgroundTint="@android:color/transparent"
+      style="@style/IconButton"
+      app:cardCornerRadius="30dp"
+      android:layout_width="30dp"
+      android:layout_height="30dp">
+      <ImageView
+        app:tint="@color/white"
+        android:src="@drawable/ic_baseline_search_24"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <EditText
+      android:id="@+id/editText"
+      android:inputType="text"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:fontFamily="@font/poppins"
+      android:textColorHint="@color/white"
+      android:hint="@string/search_anime"
+      android:background="@android:color/transparent"
+      android:layout_weight="1"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"/>
+
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/closeBtn"
+      android:backgroundTint="@color/dark_purple"
+      android:clickable="true"
+      app:cardCornerRadius="30dp"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:focusable="true">
+      <ImageView
+        app:tint="@color/purple"
+        android:src="@drawable/ic_baseline_close_24"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </com.google.android.material.card.MaterialCardView>
+  </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

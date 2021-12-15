@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.3651041666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.2838541666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.3476923076923077" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.353125" />
@@ -18,7 +19,9 @@
         <entry key="app/src/main/res/layout/component_chip.xml" value="0.165625" />
         <entry key="app/src/main/res/layout/component_homepage_top_bar.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/component_horizontal_anime_card.xml" value="0.254981884057971" />
+        <entry key="app/src/main/res/layout/component_search_anime_field.xml" value="0.459915611814346" />
         <entry key="app/src/main/res/layout/component_secondary_page_top_bar.xml" value="0.24818840579710144" />
+        <entry key="app/src/main/res/layout/page_anime_search.xml" value="0.2296195652173913" />
         <entry key="app/src/main/res/layout/page_favorite.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/page_home.xml" value="0.16388044579533942" />
         <entry key="app/src/main/res/layout/page_login.xml" value="0.125" />
@@ -26,6 +29,7 @@
         <entry key="app/src/main/res/layout/page_profile.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/page_splash.xml" value="0.151268115942029" />
         <entry key="app/src/main/res/layout/view_holder_anime.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/layout/view_holder_anime_search.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/layout/view_holder_anime_skeleton.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/view_holder_favorite_anime.xml" value="0.165625" />
         <entry key="app/src/main/res/layout/view_holder_horizontal_anime_skeleton.xml" value="0.165625" />

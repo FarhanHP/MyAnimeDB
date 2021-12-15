@@ -10,19 +10,13 @@ import com.farhanhp.myanimedb.MainActivityViewModel
 import com.farhanhp.myanimedb.MainActivityViewModelFactory
 import com.farhanhp.myanimedb.pages.main.MainPage
 
-abstract class MainChildPage: Fragment() {
+abstract class MainChildPage: MainActivityChildFragment() {
   protected lateinit var mainPageParent: MainPage
-  private lateinit var mainActivityParent: MainActivity
-  private lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
-  protected lateinit var mainActivityViewModel: MainActivityViewModel
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
 
     mainPageParent = parentFragment?.parentFragment as MainPage
-    mainActivityParent = requireActivity() as MainActivity
-    mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
-    mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
   }
 
   protected fun initBottomBar(
