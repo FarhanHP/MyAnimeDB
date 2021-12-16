@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <com.google.android.material.card.MaterialCardView
+    android:layout_marginHorizontal="30dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <LinearLayout
+      android:gravity="center_horizontal"
+      android:padding="20dp"
+      android:background="@drawable/white_background"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <LinearLayout
+        android:paddingVertical="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+          android:id="@+id/incrementButton"
+          android:elevation="10dp"
+          style="@style/Button"
+          app:cardCornerRadius="30dp"
+          android:clickable="true"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:focusable="true">
+          <ImageView
+            android:src="@drawable/ic_baseline_add_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+          android:id="@+id/scoreTextView"
+          android:textColor="@color/dark_purple"
+          android:gravity="center_horizontal"
+          android:textSize="20sp"
+          android:fontFamily="@font/poppins_bold"
+          android:layout_width="50dp"
+          android:layout_height="wrap_content"/>
+
+        <com.google.android.material.card.MaterialCardView
+          android:id="@+id/decrementButton"
+          android:elevation="10dp"
+          style="@style/Button"
+          app:cardCornerRadius="30dp"
+          android:clickable="true"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:focusable="true">
+          <ImageView
+            android:src="@drawable/ic_baseline_remove_24"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.google.android.material.card.MaterialCardView>
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+          android:layout_weight="1"
+          android:fontFamily="@font/poppins_bold"
+          android:layout_marginRight="20dp"
+          style="@style/Button"
+          android:id="@+id/setScoreBtn"
+          android:layout_height="match_parent"
+          android:layout_width="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+          android:layout_weight="1"
+          android:fontFamily="@font/poppins_bold"
+          android:text="@string/cancel"
+          style="@style/Button"
+          android:id="@+id/cancelButton"
+          android:layout_height="match_parent"
+          android:layout_width="0dp" />
+      </LinearLayout>
+    </LinearLayout>
+  </com.google.android.material.card.MaterialCardView>
+</merge>

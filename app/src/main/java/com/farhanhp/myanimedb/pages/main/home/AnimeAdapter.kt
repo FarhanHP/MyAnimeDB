@@ -1,20 +1,18 @@
 package com.farhanhp.myanimedb.pages.main.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.farhanhp.myanimedb.R
 import com.farhanhp.myanimedb.datas.Anime
 import com.farhanhp.myanimedb.loadImageToView
 
 class AnimeAdapter(
-  private val onBottomCallback: ()->Unit
+  private val onBottomCallback: ()->Unit,
+  private val onAnimeClickCallback: (anime: Anime)->Unit
 ): RecyclerView.Adapter<AnimeAdapter.ViewHolder>() {
   var data = listOf<Anime>()
     set(value) {
@@ -31,6 +29,9 @@ class AnimeAdapter(
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val currentData = data[position]
+    holder.imageView.setOnClickListener{
+      onAnimeClickCallback(currentData)
+    }
     loadImageToView(holder.imageView, currentData.imageUrl)
     holder.titleTextView.text = currentData.title
     holder.scoreTextView.text = currentData.score.toString()

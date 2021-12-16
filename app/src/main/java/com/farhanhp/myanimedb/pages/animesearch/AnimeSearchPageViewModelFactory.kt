@@ -6,7 +6,7 @@ import java.lang.IllegalArgumentException
 
 class AnimeSearchPageViewModelFactory(
   private val keyword: String,
-  private val loginToken: String
+  private val loginToken: String?
 ): ViewModelProvider.Factory {
   override fun <T : ViewModel?> create(modelClass: Class<T>): T {
     if(modelClass.isAssignableFrom(AnimeSearchPageViewModel::class.java)) {

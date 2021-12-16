@@ -11,7 +11,8 @@ import com.google.android.material.button.MaterialButton
 
 class FavoriteAnimeAdapter(
   private val onBottomCallback: () -> Unit,
-  private val deleteFavoriteAnime: (animeId: String) -> Unit
+  private val deleteFavoriteAnime: (animeId: String) -> Unit,
+  private val onAnimeClickCallback: (anime: Anime) -> Unit
 ): RecyclerView.Adapter<FavoriteAnimeAdapter.ViewHolder>() {
   var data = listOf<Anime>()
     set(value) {
@@ -26,6 +27,10 @@ class FavoriteAnimeAdapter(
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     data[position].let {
+      val anime = it
+      holder.animeCard.setOnClickListener{
+        onAnimeClickCallback(anime)
+      }
       holder.animeCard.setAttribute(it.imageUrl, it.title, it.description, it.score)
       val animeId = it.id
       holder.deleteButton.setOnClickListener{

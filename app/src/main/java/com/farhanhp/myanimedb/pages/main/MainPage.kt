@@ -1,5 +1,6 @@
 package com.farhanhp.myanimedb.pages.main
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,35 +15,36 @@ import com.farhanhp.myanimedb.MainActivity
 import com.farhanhp.myanimedb.MainActivityViewModel
 import com.farhanhp.myanimedb.MainActivityViewModelFactory
 import com.farhanhp.myanimedb.R
+import com.farhanhp.myanimedb.abstracts.MainActivityChildFragment
 import com.farhanhp.myanimedb.components.BottomBar
 import com.farhanhp.myanimedb.databinding.PageMainBinding
+import com.farhanhp.myanimedb.datas.Anime
+import com.farhanhp.myanimedb.enums.MainPageChildCode
 import com.farhanhp.myanimedb.pages.main.favorite.FavoritePage
 import com.farhanhp.myanimedb.pages.main.home.HomePage
 import com.farhanhp.myanimedb.pages.main.profile.ProfilePage
 
-class MainPage : Fragment() {
+class MainPage : MainActivityChildFragment() {
   private lateinit var binding: PageMainBinding
   private lateinit var bottomBar: BottomBar
-  private lateinit var mainActivityParent: MainActivity
-  private lateinit var mainActivityViewModel: MainActivityViewModel
-  private lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
+  private lateinit var viewModel: MainPageViewModel
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+
+    viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
     binding = DataBindingUtil.inflate(inflater, R.layout.page_main, container, false)
-    mainActivityParent = requireActivity() as MainActivity
-    mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
-    mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
-
-    initBottomBar()
-    return binding.root
-  }
-
-  private fun initBottomBar() {
     bottomBar = binding.bottomBar
-    bottomBar.setActiveButton(BottomBar.Companion.Button.HOME)
+    viewModel.currentChildPage.observe(viewLifecycleOwner) {
+      bottomBar.setActiveButton(it)
+    }
+    return binding.root
   }
 
   fun setBottomBar(
@@ -51,22 +53,22 @@ class MainPage : Fragment() {
     favoritePageDirection: NavDirections?,
     profilePageDirection: NavDirections?,
   ) {
-    val buttonCodes = BottomBar.Companion.Button.values()
+    val mainPageChildCodes = MainPageChildCode.values()
     val pageDirections = arrayOf(homePageDirection, favoritePageDirection, profilePageDirection)
 
     for(i in 0..2) {
-      val buttonCode = buttonCodes[i]
+      val mainPageChildCode = mainPageChildCodes[i]
       val pageDirection = pageDirections[i]
-      when(buttonCode) {
-        BottomBar.Companion.Button.HOME -> {
-          bottomBar.setButtonClickEvent(buttonCode) {
-            redirect(navController, pageDirection, buttonCode)
+      when(mainPageChildCode) {
+        MainPageChildCode.HOME -> {
+          bottomBar.setButtonClickEvent(mainPageChildCode) {
+            redirect(navController, pageDirection, mainPageChildCode)
           }
         }
         else -> {
-          bottomBar.setButtonClickEvent(buttonCode) {
+          bottomBar.setButtonClickEvent(mainPageChildCode) {
             if(isAuthorized()) {
-              redirect(navController, pageDirection, buttonCode)
+              redirect(navController, pageDirection, mainPageChildCode)
             } else {
               redirectToLoginPage()
             }
@@ -77,12 +79,12 @@ class MainPage : Fragment() {
   }
 
   fun redirectToHome(navController: NavController, pageDirection: NavDirections?) {
-    redirect(navController, pageDirection, BottomBar.Companion.Button.HOME)
+    redirect(navController, pageDirection, MainPageChildCode.HOME)
   }
 
-  private fun redirect(navController: NavController, pageDirection: NavDirections?, buttonCode: BottomBar.Companion.Button) {
+  private fun redirect(navController: NavController, pageDirection: NavDirections?, mainPageChildCode: MainPageChildCode) {
     if(pageDirection != null) {
-      bottomBar.setActiveButton(buttonCode)
+      viewModel.setCurrentChildPage(mainPageChildCode)
       navController.navigate(pageDirection)
     }
   }
@@ -98,5 +100,10 @@ class MainPage : Fragment() {
 
   fun redirectToSearchAnimePage(keyword: String) {
     findNavController().navigate(MainPageDirections.actionMainPageToAnimeSearchPage(keyword))
+  }
+
+  fun redirectToAnimeDetailPage(anime: Anime) {
+    mainActivityViewModel.setSelectedAnime(anime)
+    findNavController().navigate(MainPageDirections.actionMainPageToAnimeDetailPage())
   }
 }

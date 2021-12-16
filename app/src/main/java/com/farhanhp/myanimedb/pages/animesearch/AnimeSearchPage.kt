@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.farhanhp.myanimedb.R
 import com.farhanhp.myanimedb.abstracts.AnimeViewModel
@@ -15,6 +16,7 @@ import com.farhanhp.myanimedb.abstracts.SecondaryPage
 import com.farhanhp.myanimedb.adapters.HorizontalAnimeSkeletonAdapter
 import com.farhanhp.myanimedb.components.SecondaryPageTopBar
 import com.farhanhp.myanimedb.databinding.PageAnimeSearchBinding
+import com.farhanhp.myanimedb.datas.Anime
 
 class AnimeSearchPage : SecondaryPage() {
   private lateinit var binding: PageAnimeSearchBinding
@@ -33,11 +35,13 @@ class AnimeSearchPage : SecondaryPage() {
     super.onAttach(context)
 
     keyword = AnimeSearchPageArgs.fromBundle(requireArguments()).keyword
-    viewModelFactory = AnimeSearchPageViewModelFactory(keyword, mainActivityViewModel.loginToken as String)
+    viewModelFactory = AnimeSearchPageViewModelFactory(keyword, mainActivityViewModel.loginToken)
     viewModel = ViewModelProvider(this, viewModelFactory).get(AnimeSearchPageViewModel::class.java)
-    animeSearchAdapter = AnimeSearchAdapter {
+    animeSearchAdapter = AnimeSearchAdapter ({
       viewModel.fetchAnime()
-    }
+    }, {
+      redirectToAnimeDetailPage(it)
+    })
   }
 
   override fun onCreateView(
@@ -77,5 +81,10 @@ class AnimeSearchPage : SecondaryPage() {
     }
 
     return binding.root
+  }
+
+  private fun redirectToAnimeDetailPage(anime: Anime) {
+    mainActivityViewModel.setSelectedAnime(anime)
+    findNavController().navigate(AnimeSearchPageDirections.actionAnimeSearchPageToAnimeDetailPage())
   }
 }

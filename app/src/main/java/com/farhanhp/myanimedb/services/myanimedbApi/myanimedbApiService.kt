@@ -1,10 +1,7 @@
 package com.farhanhp.myanimedb.services.myanimedbApi
 
 import android.util.Log
-import com.farhanhp.myanimedb.datas.GetAnimeResponse
-import com.farhanhp.myanimedb.datas.LoginUser
-import com.farhanhp.myanimedb.datas.LoginWithGoogleBody
-import com.farhanhp.myanimedb.datas.LoginWithGoogleResponse
+import com.farhanhp.myanimedb.datas.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -133,6 +130,74 @@ object MyAnimeDbApiService {
         return deleteFavoriteAnime(loginToken, animeId, timeoutCount + 1)
       }
     }
+  }
+
+  suspend fun addFavoriteAnime(
+    loginToken: String,
+    animeId: String,
+    timeoutCount: Int = 0,
+  ): Anime? {
+    try {
+      val response = retrofitService.addFavoriteAnime(loginToken, animeId).awaitResponse()
+      if(response.isSuccessful) {
+        return response.body()
+      }
+    } catch (error: Throwable) {
+      Log.e(TAG, error.message.toString())
+
+      // resend request when heroku server is down due to idling for certain time
+      if(error is SocketTimeoutException && timeoutCount < 2) {
+        return addFavoriteAnime(loginToken, animeId, timeoutCount + 1)
+      }
+    }
+
+    return null
+  }
+
+  suspend fun addAnimeScore(
+    loginToken: String,
+    animeId: String,
+    score: Int,
+    timeoutCount: Int = 0
+  ): AnimeScoreResponse? {
+    try {
+      val response = retrofitService.addAnimeScore(loginToken, animeId, AnimeScoreBody(score)).awaitResponse()
+      if(response.isSuccessful) {
+        return response.body()
+      }
+    } catch (error: Throwable) {
+      Log.e(TAG, error.message.toString())
+
+      // resend request when heroku server is down due to idling for certain time
+      if(error is SocketTimeoutException && timeoutCount < 2) {
+        return addAnimeScore(loginToken, animeId, score,timeoutCount + 1)
+      }
+    }
+
+    return null
+  }
+
+  suspend fun updateAnimeScore(
+    loginToken: String,
+    animeId: String,
+    score: Int,
+    timeoutCount: Int = 0
+  ): AnimeScoreResponse? {
+    try {
+      val response = retrofitService.updateAnimeScore(loginToken, animeId, AnimeScoreBody(score)).awaitResponse()
+      if(response.isSuccessful) {
+        return response.body()
+      }
+    } catch (error: Throwable) {
+      Log.e(TAG, error.message.toString())
+
+      // resend request when heroku server is down due to idling for certain time
+      if(error is SocketTimeoutException && timeoutCount < 2) {
+        return updateAnimeScore(loginToken, animeId, score,timeoutCount + 1)
+      }
+    }
+
+    return null
   }
 
   private const val TAG = "MyAnimeDbApiService"

@@ -29,9 +29,11 @@ class HomePage : MainChildPage() {
 
     viewModelFactory = HomePageViewModelFactory(mainActivityViewModel.loginToken)
     viewModel = ViewModelProvider(this, viewModelFactory).get(HomePageViewModel::class.java)
-    animeAdapter = AnimeAdapter {
+    animeAdapter = AnimeAdapter ({
       viewModel.fetchAnime()
-    }
+    }, {
+      mainPageParent.redirectToAnimeDetailPage(it)
+    })
     animeSkeletonAdapter = AnimeSkeletonAdapter(AnimeViewModel.LIMIT)
   }
 

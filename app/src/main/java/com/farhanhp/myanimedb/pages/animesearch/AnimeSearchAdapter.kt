@@ -9,7 +9,8 @@ import com.farhanhp.myanimedb.components.HorizontalAnimeCard
 import com.farhanhp.myanimedb.datas.Anime
 
 class AnimeSearchAdapter(
-  private val onBottomCallback: () -> Unit
+  private val onBottomCallback: () -> Unit,
+  private val onAnimeClickCallback: (anime: Anime) -> Unit,
 ): RecyclerView.Adapter<AnimeSearchAdapter.ViewHolder>() {
   var data = listOf<Anime>()
     set(value) {
@@ -26,6 +27,10 @@ class AnimeSearchAdapter(
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     data[position].let {
+      val anime = it
+      holder.root.setOnClickListener{
+        onAnimeClickCallback(anime)
+      }
       holder.root.setAttribute(it.imageUrl, it.title, it.description, it.score)
     }
 

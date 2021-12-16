@@ -67,16 +67,11 @@
       </LinearLayout>
 
       <com.google.android.material.button.MaterialButton
+        style="@style/Button"
         app:iconGravity="end"
         app:iconTint="@color/dark_purple"
         app:icon="@drawable/ic_baseline_exit_to_app_24"
         android:id="@+id/logoutBtn"
-        app:strokeColor="@color/dark_purple"
-        app:strokeWidth="2dp"
-        android:textColor="@color/dark_purple"
-        android:fontFamily="@font/poppins_bold"
-        android:backgroundTint="@color/grey"
-        app:cornerRadius="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/log_out"
         app:layout_constraintBottom_toBottomOf="parent"

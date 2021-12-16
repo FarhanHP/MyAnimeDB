@@ -27,6 +27,9 @@
     <action
       android:id="@+id/action_mainPage_to_animeSearchPage"
       app:destination="@id/animeSearchPage" />
+    <action
+      android:id="@+id/action_mainPage_to_animeDetailPage"
+      app:destination="@id/animeDetailPage" />
   </fragment>
   <fragment
     android:id="@+id/loginPage"
@@ -47,5 +50,16 @@
     <argument
       android:name="keyword"
       app:argType="string" />
+    <action
+      android:id="@+id/action_animeSearchPage_to_animeDetailPage"
+      app:destination="@id/animeDetailPage" />
+  </fragment>
+  <fragment
+    android:id="@+id/animeDetailPage"
+    android:name="com.farhanhp.myanimedb.pages.animedetail.AnimeDetailPage"
+    android:label="AnimeDetailPage" >
+    <action
+      android:id="@+id/action_animeDetailPage_to_loginPage"
+      app:destination="@id/loginPage" />
   </fragment>
 </navigation>

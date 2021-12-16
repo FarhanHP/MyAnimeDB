@@ -34,6 +34,8 @@ class FavoritePage : MainChildPage() {
       viewModel.fetchAnime()
     }, {
       viewModel.deleteFavoriteAnime(it)
+    }, {
+      mainPageParent.redirectToAnimeDetailPage(it)
     })
     horizontalAnimeSkeletonAdapter = HorizontalAnimeSkeletonAdapter(FavoritePageViewModel.LIMIT)
   }

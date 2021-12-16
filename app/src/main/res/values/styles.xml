@@ -14,4 +14,13 @@
   <style name="BottomBarIconButton" parent="IconButton">
     <item name="iconTint">@color/purple_50p</item>
   </style>
+
+  <style name="Button">
+    <item name="strokeColor">@color/dark_purple</item>
+    <item name="strokeWidth">2dp</item>
+    <item name="android:textColor">@color/dark_purple</item>
+    <item name="android:fontFamily">@font/poppins_bold</item>
+    <item name="android:backgroundTint">@color/grey</item>
+    <item name="cornerRadius">10dp</item>
+  </style>
 </resources>

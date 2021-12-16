@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.farhanhp.myanimedb.datas.Anime
 import com.farhanhp.myanimedb.datas.LoginUser
 import com.farhanhp.myanimedb.services.myanimedbApi.MyAnimeDbApiService
 import kotlinx.coroutines.launch
@@ -26,6 +27,9 @@ class MainActivityViewModel(
     }
 
   var loginUser: LoginUser? = null
+    private set
+
+  var selectedAnime: Anime? = null
     private set
 
   fun checkLoginStatus(
@@ -70,6 +74,10 @@ class MainActivityViewModel(
   fun logout() {
     loginUser = null
     loginToken = null
+  }
+
+  fun setSelectedAnime(anime: Anime) {
+    selectedAnime = anime
   }
 
   companion object {

@@ -20,7 +20,7 @@ class LoginPage : SecondaryPage() {
   private lateinit var binding: PageLoginBinding
   private lateinit var topbar: SecondaryPageTopBar
   private lateinit var googleSignIn: MaterialCardView
-  private lateinit var loadingDialog: RelativeLayout
+  private lateinit var loadingDialog: View
   private lateinit var viewModel: LoginPageViewModel
 
   override fun onCreateView(

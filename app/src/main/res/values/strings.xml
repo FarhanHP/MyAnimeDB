@@ -12,4 +12,5 @@
   <string name="score">Score</string>
   <string name="no_favorite_anime">No Favorite Anime :(</string>
   <string name="search_anime">Search Anime</string>
+  <string name="cancel">Cancel</string>
 </resources>

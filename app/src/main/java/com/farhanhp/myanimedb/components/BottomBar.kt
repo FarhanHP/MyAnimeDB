@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.farhanhp.myanimedb.R
+import com.farhanhp.myanimedb.enums.MainPageChildCode
 import com.google.android.material.button.MaterialButton
 
 class BottomBar(context: Context, attrs: AttributeSet): LinearLayout(context, attrs) {
@@ -29,19 +30,19 @@ class BottomBar(context: Context, attrs: AttributeSet): LinearLayout(context, at
     accountBtnIndicator = findViewById(R.id.accountBtnIndicator)
   }
 
-  fun setActiveButton(button: Button) {
-    when(button) {
-      Button.HOME -> {
+  fun setActiveButton(mainPageChildCode: MainPageChildCode) {
+    when(mainPageChildCode) {
+      MainPageChildCode.HOME -> {
         applyActiveButtonStyle(homeButtonIndicator, homeButton)
         applyPassiveButtonStyle(favoriteButtonIndicator, favoriteButton)
         applyPassiveButtonStyle(accountBtnIndicator, accountButton)
       }
-      Button.FAVORITE -> {
+      MainPageChildCode.FAVORITE -> {
         applyPassiveButtonStyle(homeButtonIndicator, homeButton)
         applyActiveButtonStyle(favoriteButtonIndicator, favoriteButton)
         applyPassiveButtonStyle(accountBtnIndicator, accountButton)
       }
-      Button.PROFILE -> {
+      MainPageChildCode.PROFILE -> {
         applyPassiveButtonStyle(homeButtonIndicator, homeButton)
         applyPassiveButtonStyle(favoriteButtonIndicator, favoriteButton)
         applyActiveButtonStyle(accountBtnIndicator, accountButton)
@@ -59,21 +60,13 @@ class BottomBar(context: Context, attrs: AttributeSet): LinearLayout(context, at
     button.iconTint = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.purple_50p))
   }
 
-  fun setButtonClickEvent(button: Button, fn: ()->Unit) {
-    val selectedButton = when(button) {
-      Button.HOME -> homeButton
-      Button.PROFILE -> accountButton
-      Button.FAVORITE -> favoriteButton
+  fun setButtonClickEvent(mainPageChildCode: MainPageChildCode, fn: ()->Unit) {
+    val selectedButton = when(mainPageChildCode) {
+      MainPageChildCode.HOME -> homeButton
+      MainPageChildCode.PROFILE -> accountButton
+      MainPageChildCode.FAVORITE -> favoriteButton
     }
 
     selectedButton.setOnClickListener{ fn() }
-  }
-
-  companion object {
-    enum class Button {
-      HOME,
-      FAVORITE,
-      PROFILE
-    }
   }
 }
