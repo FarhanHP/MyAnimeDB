@@ -90,11 +90,12 @@ class AnimeDetailPageViewModel(
             _selectedAnime.value = newAnime
             syncAnimeSource(newAnime.isFavorite, newAnime.score, newAnime.userCount)
             successCallback()
-            _animeScoreLoading.value = false
           }
         } else {
           failCallback()
         }
+
+        _animeScoreLoading.value = false
       }
     } else {
       failCallback()
@@ -120,11 +121,12 @@ class AnimeDetailPageViewModel(
             syncAnimeSource(newAnime.isFavorite, newAnime.score, newAnime.userCount)
             _selectedAnime.value = newAnime
             successCallback()
-            _animeScoreLoading.value = false
           }
         } else {
           failCallback()
         }
+
+        _animeScoreLoading.value = false
       }
     } else {
       failCallback()
