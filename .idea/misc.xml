@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/purple_background.xml" value="0.353125" />
         <entry key="app/src/main/res/drawable/white_background.xml" value="0.3476923076923077" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.151268115942029" />
+        <entry key="app/src/main/res/layout/activity_youtube_player.xml" value="0.21240942028985507" />
         <entry key="app/src/main/res/layout/component_anime_score_dialog.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/component_bottom_bar.xml" value="0.33" />
         <entry key="app/src/main/res/layout/component_chip.xml" value="0.165625" />

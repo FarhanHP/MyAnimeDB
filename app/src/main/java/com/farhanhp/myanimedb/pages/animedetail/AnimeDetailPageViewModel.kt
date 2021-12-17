@@ -7,9 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.farhanhp.myanimedb.datas.Anime
 import com.farhanhp.myanimedb.services.myanimedbApi.MyAnimeDbApiService
 import kotlinx.coroutines.launch
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KMutableProperty1
-import kotlin.reflect.full.declaredMemberProperties
 
 class AnimeDetailPageViewModel(
   private val anime: Anime,

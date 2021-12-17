@@ -19,4 +19,8 @@ abstract class MainActivityChildFragment: Fragment() {
     mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
     mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
   }
+
+  protected fun openYoutubeActivity(youtubeId: String) {
+    mainActivityParent.openYoutubePlayerActivity(youtubeId)
+  }
 }

@@ -33,7 +33,7 @@ class LoginPage : SecondaryPage() {
     topbar.setBackButtonClickListener {
       openPriorPage()
     }
-    loadingDialog = binding.loadingDialog
+    loadingDialog = binding.loadingDialog.root
     viewModel.loggingIn.observe(viewLifecycleOwner) {
       loadingDialog.visibility = when(it) {
         true -> View.VISIBLE

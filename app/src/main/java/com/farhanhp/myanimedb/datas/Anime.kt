@@ -5,7 +5,7 @@ data class Anime(
   var description: String,
   var title: String,
   var imageUrl: String,
-  var videoUrl: String?,
+  var youtubeVideoId: String?,
   var episodeCount: Int?,
   var score: Double,
   var userCount: Int,

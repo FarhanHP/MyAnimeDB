@@ -24,12 +24,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <androidx.constraintlayout.widget.ConstraintLayout
-          android:minHeight="600dp"
+          android:minHeight="700dp"
           android:padding="10dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
 
           <com.google.android.material.card.MaterialCardView
+            android:layout_marginTop="100dp"
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -37,7 +38,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <View
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -53,6 +53,64 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp">
+            <com.google.android.material.card.MaterialCardView
+              android:backgroundTint="#ee000000"
+              android:layout_marginBottom="10dp"
+              android:id="@+id/youtubeThumbnailContainer"
+              app:cardCornerRadius="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="200dp">
+              <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:id="@+id/youtubeThumbnail"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"/>
+
+                <LinearLayout
+                  android:background="#55000000"
+                  android:gravity="center"
+                  android:orientation="vertical"
+                  android:elevation="1dp"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:id="@+id/playButtonContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+                  <com.google.android.material.card.MaterialCardView
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@android:color/transparent"
+                    android:id="@+id/playButton"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="60dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp">
+                    <ImageView
+                      app:tint="@color/purple"
+                      android:src="@drawable/ic_baseline_play_circle_24"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"/>
+                  </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <TextView
+                  android:id="@+id/noVideoText"
+                  android:text="@string/no_video"
+                  android:textSize="18sp"
+                  android:textColor="@color/white"
+                  android:fontFamily="@font/poppins_semibold"
+                  android:gravity="center"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"/>
+              </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <LinearLayout
               android:gravity="top"
               android:orientation="horizontal"

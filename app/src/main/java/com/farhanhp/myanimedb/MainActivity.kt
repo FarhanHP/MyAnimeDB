@@ -33,6 +33,13 @@ class MainActivity : AppCompatActivity() {
     initGoogleSignIn()
   }
 
+  fun openYoutubePlayerActivity(youtubeId: String) {
+    val intent = Intent(this, YoutubePlayerActivity::class.java).apply {
+      putExtra(YoutubePlayerActivity.EXTRA_MESSAGE_VIDEO_ID, youtubeId)
+    }
+    startActivity(intent)
+  }
+
   private fun initGoogleSignIn() {
     oneTapClient = Identity.getSignInClient(this)
     signUpRequest = BeginSignInRequest.builder()

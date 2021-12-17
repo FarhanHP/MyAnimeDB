@@ -1,13 +1,17 @@
 package com.farhanhp.myanimedb.pages.animedetail
 
 import android.content.Context
+import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -38,6 +42,11 @@ class AnimeDetailPage : SecondaryPage() {
   private lateinit var viewModelFactory: AnimeDetailPageViewModelFactory
   private lateinit var loadingDialog: View
   private lateinit var animeScoreDialog: AnimeScoreDialog
+  private lateinit var youtubeThumbnail: ImageView
+  private lateinit var youtubeThumbnailContainer: MaterialCardView
+  private lateinit var noVideoText: TextView
+  private lateinit var playButtonContainer: LinearLayout
+  private lateinit var playButton: MaterialCardView
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
@@ -64,8 +73,13 @@ class AnimeDetailPage : SecondaryPage() {
     card = binding.card
     favoriteBtn = binding.favoriteBtn
     scoreBtn = binding.scoreBtn
-    loadingDialog = binding.loadingDialog
+    loadingDialog = binding.loadingDialog.root
     animeScoreDialog = binding.scoreDialog
+    youtubeThumbnail = binding.youtubeThumbnail
+    youtubeThumbnailContainer = binding.youtubeThumbnailContainer
+    noVideoText = binding.noVideoText
+    playButton = binding.playButton
+    playButtonContainer = binding.playButtonContainer
 
     animeScoreDialog.setOnCancel {
       viewModel.closeScoreAnimeDialog()
@@ -79,7 +93,7 @@ class AnimeDetailPage : SecondaryPage() {
     }
 
     viewModel.animeScoreLoading.observe(viewLifecycleOwner) {
-      // animeScoreDialog.setLoading(it)
+      animeScoreDialog.setLoading(it)
     }
 
     viewModel.selectedAnime.observe(viewLifecycleOwner) {
@@ -94,6 +108,21 @@ class AnimeDetailPage : SecondaryPage() {
       score.setText(it.score.toString())
       description.text = it.description
       animeScoreDialog.setType(it.scoreGiven != -1)
+    }
+
+    viewModel.selectedAnime.observe(viewLifecycleOwner) {
+      if(it.youtubeVideoId != null) {
+        playButtonContainer.visibility = View.VISIBLE
+        val anime = it
+        playButton.setOnClickListener{
+          openYoutubeActivity(anime.youtubeVideoId as String)
+        }
+        noVideoText.visibility = View.GONE
+        loadImageToView(youtubeThumbnail, "https://img.youtube.com/vi/${it.youtubeVideoId}/mqdefault.jpg", true)
+      } else {
+        playButtonContainer.visibility = View.GONE
+        noVideoText.visibility = View.VISIBLE
+      }
     }
 
     viewModel.selectedAnime.observe(viewLifecycleOwner) {
