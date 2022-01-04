@@ -22,6 +22,9 @@ https://github.com/FarhanHP/myanimedb-api
 Thanks to Kitsu Anime API which provide anime data for this app
 https://github.com/hummingbird-me/api-docs
 
+### 1.4 Application Demo
+Watch application features demonstration here: https://youtu.be/7mxWPTrPGm0
+
 ## 2 Play Store
 You can download this app in playstore: https://play.google.com/store/apps/details?id=com.farhanhp.myanimedb
 
