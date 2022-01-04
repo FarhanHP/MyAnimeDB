@@ -16,7 +16,7 @@ abstract class MainActivityChildFragment: Fragment() {
     super.onAttach(context)
 
     mainActivityParent = requireActivity() as MainActivity
-    mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
+    mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application, mainActivityParent.oneTapClient)
     mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
   }
 

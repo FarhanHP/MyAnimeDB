@@ -16,7 +16,7 @@ import kotlinx.coroutines.coroutineScope
 class MainActivity : AppCompatActivity() {
   private lateinit var viewModelFactory: MainActivityViewModelFactory
   private lateinit var viewModel: MainActivityViewModel
-  private lateinit var oneTapClient: SignInClient
+  lateinit var oneTapClient: SignInClient
   private lateinit var signUpRequest: BeginSignInRequest
   private val REQ_ONE_TAP = 1  // Can be any integer unique to the Activity
 
@@ -24,13 +24,11 @@ class MainActivity : AppCompatActivity() {
   private var googleSignInFailCallback: (()->Unit)? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    initGoogleSignIn()
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
-    viewModelFactory = MainActivityViewModelFactory(application)
+    viewModelFactory = MainActivityViewModelFactory(application, oneTapClient)
     viewModel = ViewModelProvider(this, viewModelFactory).get(MainActivityViewModel::class.java)
-
-    initGoogleSignIn()
   }
 
   fun openYoutubePlayerActivity(youtubeId: String) {
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity() {
           // Your server's client ID, not your Android client ID.
           .setServerClientId(getString(R.string.web_client_id))
           // Show all accounts on the device.
-          .setFilterByAuthorizedAccounts(false)
+          .setFilterByAuthorizedAccounts(true)
           .build())
       .build()
   }
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity() {
       .addOnFailureListener(this) { e ->
         // No Google Accounts found. Just continue presenting the signed-out UI.
         googleSignInFailCallback?.invoke()
-        Log.d(TAG, e.localizedMessage)
+        Log.e(TAG, e.stackTraceToString())
       }
   }
 

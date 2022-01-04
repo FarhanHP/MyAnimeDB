@@ -5,26 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.farhanhp.myanimedb.MainActivity
 import com.farhanhp.myanimedb.MainActivityViewModel
 import com.farhanhp.myanimedb.MainActivityViewModelFactory
 import com.farhanhp.myanimedb.R
+import com.farhanhp.myanimedb.abstracts.MainActivityChildFragment
+import com.farhanhp.myanimedb.databinding.PageSplashBinding
 
-class SplashPage : Fragment() {
-  private lateinit var mainActivityParent: MainActivity
-  private lateinit var mainActivityViewModel: MainActivityViewModel
-  private lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
+class SplashPage : MainActivityChildFragment() {
+  private lateinit var binding: PageSplashBinding
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View {
-    val view = inflater.inflate(R.layout.page_splash, container, false)
-    mainActivityParent = requireActivity() as MainActivity
-    mainActivityViewModelFactory = MainActivityViewModelFactory(mainActivityParent.application)
-    mainActivityViewModel = ViewModelProvider(mainActivityParent, mainActivityViewModelFactory).get(MainActivityViewModel::class.java)
+    binding = DataBindingUtil.inflate(inflater, R.layout.page_splash, container, false)
     mainActivityViewModel.checkLoginStatus({
       redirectToHomePage()
     }, {
@@ -32,7 +30,7 @@ class SplashPage : Fragment() {
     })
 
     // Inflate the layout for this fragment
-    return view
+    return binding.root
   }
 
   private fun redirectToHomePage() {

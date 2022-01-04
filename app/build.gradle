@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+  signingConfigs {
+    release {
+      storeFile file('/home/farhanhp/Android/keystore/keystore.jks')
+      storePassword 'Nanas31110'
+      keyAlias 'MyAndroidKey'
+      keyPassword 'Nanas31110'
+    }
+  }
   compileSdk 31
 
   dataBinding {

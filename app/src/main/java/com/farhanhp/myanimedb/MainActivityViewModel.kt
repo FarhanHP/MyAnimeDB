@@ -8,10 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.farhanhp.myanimedb.datas.Anime
 import com.farhanhp.myanimedb.datas.LoginUser
 import com.farhanhp.myanimedb.services.myanimedbApi.MyAnimeDbApiService
+import com.google.android.gms.auth.api.identity.SignInClient
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(
-  private val application: Application
+  private val application: Application,
+  private val oneTapClient: SignInClient,
 ): ViewModel() {
   var loginToken: String? = null
     get() {
@@ -74,6 +76,7 @@ class MainActivityViewModel(
   fun logout() {
     loginUser = null
     loginToken = null
+    oneTapClient.signOut()
   }
 
   fun setSelectedAnime(anime: Anime) {
