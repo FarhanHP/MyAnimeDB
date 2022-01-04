@@ -6,11 +6,17 @@ plugins {
 
 android {
   signingConfigs {
+    debug {
+      storeFile file('/home/farhanhp/Android/keystore/keystore.jks')
+      keyAlias 'myandroidkey'
+      storePassword 'Nanas3111()'
+      keyPassword 'Nanas3111()'
+    }
     release {
       storeFile file('/home/farhanhp/Android/keystore/keystore.jks')
-      storePassword 'Nanas31110'
-      keyAlias 'MyAndroidKey'
-      keyPassword 'Nanas31110'
+      storePassword 'Nanas3111()'
+      keyAlias 'myandroidkey'
+      keyPassword 'Nanas3111()'
     }
   }
   compileSdk 31
